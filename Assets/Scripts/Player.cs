@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    public Text scoreText;
+
     private Animation thisAnimation;
     Rigidbody PlayerRB;
 
@@ -41,6 +44,15 @@ public class Player : MonoBehaviour
         if(collision.gameObject.tag == "obstacle")
         {
             SceneManager.LoadScene("GameOver");
+        }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "score")
+        {
+            GameManager.Score++;
+            scoreText.GetComponent<Text>().text = "SCORE :" + GameManager.Score;
         }
     }
 
